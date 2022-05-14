@@ -13,7 +13,8 @@ DWORD Memory::GetProcessId(const char* procName)
 
     do
     {
-        if (!strcmp(ProcEntry.szExeFile, procName))
+        //convert WCHAR* to char*
+        if (!strcmp((char*)ProcEntry.szExeFile, procName))
         {
             pid = ProcEntry.th32ProcessID;
             CloseHandle(hPID);
@@ -35,7 +36,7 @@ MODULEENTRY32 Memory::GetModule(DWORD procId, const char* modName)
         {
             do
             {
-                if (!strcmp(modEntry.szModule, modName))
+                if (!strcmp((char*)modEntry.szModule, modName))
                 {
                     break;
                 }
